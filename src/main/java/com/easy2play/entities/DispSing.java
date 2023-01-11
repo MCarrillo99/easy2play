@@ -1,6 +1,6 @@
 package com.easy2play.entities;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 import java.time.LocalDateTime;
 
@@ -18,4 +18,30 @@ public class DispSing {
     @ManyToOne
     private Player player;
 
+    public DispSing() {
+    }
+
+    public long getIdDispSing() {
+        return idDispSing;
+    }
+
+    public void setIdDispSing(long idDispSing) {
+        this.idDispSing = idDispSing;
+    }
+
+    public LocalDateTime getOrario() {
+        return orario;
+    }
+
+    public void setOrario(LocalDateTime orario) {
+        this.orario = orario;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
 }

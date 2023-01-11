@@ -1,6 +1,8 @@
 package com.easy2play.entities;
 
-import jakarta.persistence.*;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
 
 import java.util.List;
 
@@ -14,7 +16,34 @@ public class TeamBuild {
 
     private String teamName;
 
-    //@OneToMany
-    //private List<Player> players;
+    @JsonIgnore
+    @OneToMany(mappedBy = "teamBuild")
+    private List<Player> players;
 
+    public TeamBuild() {
+    }
+
+    public long getIdTeamBuild() {
+        return idTeamBuild;
+    }
+
+    public void setIdTeamBuild(long idTeamBuild) {
+        this.idTeamBuild = idTeamBuild;
+    }
+
+    public String getTeamName() {
+        return teamName;
+    }
+
+    public void setTeamName(String teamName) {
+        this.teamName = teamName;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
+    }
 }

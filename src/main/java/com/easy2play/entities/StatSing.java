@@ -1,6 +1,6 @@
 package com.easy2play.entities;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
 
 @Entity
 @Table
@@ -12,8 +12,33 @@ public class StatSing {
 
     private double randomStat;
 
-    @OneToOne
-    //@Column(name = "idPlayer")
+    @OneToOne(cascade = CascadeType.ALL)
     private Player player;
 
+    public StatSing() {
+    }
+
+    public long getIdStatSing() {
+        return idStatSing;
+    }
+
+    public void setIdStatSing(long idStatSing) {
+        this.idStatSing = idStatSing;
+    }
+
+    public double getRandomStat() {
+        return randomStat;
+    }
+
+    public void setRandomStat(double randomStat) {
+        this.randomStat = randomStat;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
 }
