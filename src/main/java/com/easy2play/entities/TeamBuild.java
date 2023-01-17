@@ -16,11 +16,25 @@ public class TeamBuild {
 
     private String teamName;
 
+    private double lati;
+
+    private double longi;
+
+
     @JsonIgnore
     @OneToMany(mappedBy = "teamBuild")
     private List<Player> players;
 
     public TeamBuild() {
+    }
+
+    public TeamBuild(long idTeamBuild, String teamName) {
+        this.idTeamBuild = idTeamBuild;
+        this.teamName = teamName;
+    }
+
+    public TeamBuild(String teamName) {
+        this.teamName = teamName;
     }
 
     public long getIdTeamBuild() {
@@ -37,6 +51,22 @@ public class TeamBuild {
 
     public void setTeamName(String teamName) {
         this.teamName = teamName;
+    }
+
+    public double getLati() {
+        return lati;
+    }
+
+    public void setLati(double lati) {
+        this.lati = lati;
+    }
+
+    public double getLongi() {
+        return longi;
+    }
+
+    public void setLongi(double longi) {
+        this.longi = longi;
     }
 
     public List<Player> getPlayers() {
