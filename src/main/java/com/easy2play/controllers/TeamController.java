@@ -1,7 +1,9 @@
 package com.easy2play.controllers;
 
+import com.easy2play.DTO.ParamRequest;
 import com.easy2play.DTO.TeamDTO;
 import com.easy2play.entities.Team;
+import com.easy2play.entities.TeamBuild;
 import com.easy2play.services.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -25,6 +27,12 @@ public class TeamController {
     @PutMapping("/{id}/coordinate")
     public void coordinate(@PathVariable Long id, @RequestParam double lati, @RequestParam double longi) {
         ts.addCoordinate(id, lati, longi);
+    }
+
+    @PostMapping("/getAvailableMatch")
+    public ResponseEntity<?> getAvailableMatch(@RequestBody ParamRequest paramRequest){
+        List<TeamBuild> tbList = ts.getAvailableMatch(paramRequest);
+        return ResponseEntity.ok(tbList);
     }
 
     @GetMapping("/compatibilità")

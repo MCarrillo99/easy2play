@@ -1,7 +1,10 @@
 package com.easy2play.services;
 
+import com.easy2play.DTO.ParamRequest;
 import com.easy2play.DTO.TeamDTO;
 import com.easy2play.entities.Team;
+import com.easy2play.entities.TeamBuild;
+import com.easy2play.repo.TeamBuildRepo;
 import com.easy2play.repo.TeamRepo;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,9 @@ public class TeamService {
 
     @Autowired
     private TeamRepo teamRepo;
+
+    @Autowired
+    private TeamBuildRepo teamBuildRepo;
 
     @Autowired
     private ModelMapper md;
@@ -55,6 +61,15 @@ public class TeamService {
 
     public List<Team> findCompatibili(double latiPiuRag, double latiMenoRag, double longiPiuRag, double LongiMenoRag){
         return teamRepo.findByLatiAndLongi(latiPiuRag, latiMenoRag, longiPiuRag, LongiMenoRag);
+    }
+
+    public List<TeamBuild> getAvailableMatch(ParamRequest pm){
+        Double latPiuRag = pm.getLatitude()+ pm.getRaggio();
+        Double lonPiuRag = pm.getLongitude()+pm.getRaggio();
+        Double latMenRag = pm.getLatitude()- pm.getRaggio();
+        Double lonMenRag = pm.getLongitude()-pm.getRaggio();
+        List<TeamBuild> teamBuildList = teamBuildRepo.findByParams(latPiuRag, lonPiuRag, latMenRag, lonMenRag);
+        return teamBuildList;
     }
 
 }
