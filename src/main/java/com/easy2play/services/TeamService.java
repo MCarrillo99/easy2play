@@ -64,14 +64,8 @@ public class TeamService {
         return team;
     }
 
-    public List<Team> findCompatibili(double latiPiuRag, double latiMenoRag, double longiPiuRag, double LongiMenoRag){
-        return teamRepo.findByLatiAndLongi(latiPiuRag, latiMenoRag, longiPiuRag, LongiMenoRag);
-    }
-
-    public List<TeamBuild> getAvailableMatch(ParamRequest pm){
-        List<TeamBuild> teamBuildList = teamBuildRepo.findByParams(pm.getLatitude(), pm.getLongitude(), pm.getRaggio());
-        log.info("partite che tornano: " + teamBuildList.size());
-        return teamBuildList;
+    public List<Team> findCompatibili(double longi, double lati, double raggio){
+        return teamRepo.findByLatiAndLongi(longi, lati, raggio);
     }
 
 }

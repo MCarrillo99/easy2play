@@ -29,21 +29,17 @@ public class TeamController {
     }
 
     @PutMapping("/{id}/coordinate")
-    public void coordinate(@PathVariable Long id, @RequestParam double lati, @RequestParam double longi) {
-        ts.addCoordinate(id, lati, longi);
+    public ResponseEntity<?> coordinate(@PathVariable Long id, @RequestParam double lati, @RequestParam double longi) {
+        Team team = ts.addCoordinate(id, lati, longi);
+        return ResponseEntity.ok(team);
     }
 
-    @PostMapping("/getAvailableMatch")
-    public ResponseEntity<?> getAvailableMatch(@RequestBody ParamRequest paramRequest){
-        log.info("oggetto post: " + paramRequest);
-        List<TeamBuild> tbList = ts.getAvailableMatch(paramRequest);
-        return ResponseEntity.ok(tbList);
-    }
 
     @GetMapping("/compatibilità")
-    public List<Team> findTeam(@RequestBody TeamDTO teamDTO, @RequestParam double raggio){
-        return ts.findCompatibili((teamDTO.getLati()+raggio), (teamDTO.getLati()-raggio), (teamDTO.getLongi()+raggio),
-                                  (teamDTO.getLongi()-raggio));
+    public ResponseEntity<?> findTeam(@RequestBody ParamRequest pr){
+        log.info("oggetto post: " + pr);
+        List<Team> teams = ts.findCompatibili(pr.getLongitude(), pr.getLatitude(), pr.getRaggio());
+        return ResponseEntity.ok(teams);
     }
 
 
