@@ -1,15 +1,15 @@
 package com.easy2play.DTO;
 
 public class ParamRequest {
-    private Integer raggio;
+    private Double raggio;
     private Double latitude;
     private Double longitude;
 
-    public Integer getRaggio() {
+    public Double getRaggio() {
         return raggio;
     }
 
-    public void setRaggio(Integer raggio) {
+    public void setRaggio(Double raggio) {
         this.raggio = raggio;
     }
 
@@ -27,5 +27,14 @@ public class ParamRequest {
 
     public void setLongitude(Double longitude) {
         this.longitude = longitude;
+    }
+
+    @Override
+    public String toString() {
+        return "ParamRequest{" +
+                "raggio=" + raggio +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                '}';
     }
 }

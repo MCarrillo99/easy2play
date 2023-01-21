@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface TeamBuildRepo extends JpaRepository<TeamBuild, Integer> {
-    @Query(value = "select * from team_build where lati <= :latitudePlusRaggio and lati >= :latitudeMinusRaggio and longi <= :longitudePlusRaggio and longi >= :longitudeMinusRaggio", nativeQuery = true)
-    List<TeamBuild> findByParams(Double latitudePlusRaggio, Double longitudePlusRaggio, Double latitudeMinusRaggio, Double longitudeMinusRaggio);
+    @Query(value = "SELECT * FROM team_build WHERE (6371 * acos(cos(radians(:latitude)) * cos(radians(lati)) * cos(radians(longi) - radians(:longitude)) + sin(radians(:latitude)) * sin(radians(lati)))) <= :radius", nativeQuery = true)
+    List<TeamBuild> findByParams(Double latitude, Double longitude, Double radius);
 }

@@ -20,6 +20,7 @@ public class TeamBuild {
 
     private double longi;
 
+    private Integer otherPlayers;
 
     @JsonIgnore
     @OneToMany(mappedBy = "teamBuild")

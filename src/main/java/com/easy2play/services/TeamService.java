@@ -2,11 +2,14 @@ package com.easy2play.services;
 
 import com.easy2play.DTO.ParamRequest;
 import com.easy2play.DTO.TeamDTO;
+import com.easy2play.controllers.TeamController;
 import com.easy2play.entities.Team;
 import com.easy2play.entities.TeamBuild;
 import com.easy2play.repo.TeamBuildRepo;
 import com.easy2play.repo.TeamRepo;
 import org.modelmapper.ModelMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +28,8 @@ public class TeamService {
 
     @Autowired
     private ModelMapper md;
+
+    private static final Logger log = LoggerFactory.getLogger(TeamService.class);
 
     public ResponseEntity<Team> createNewTeam(TeamDTO teamDTO) {
         Team newMedico= md.map(teamDTO, Team.class);
@@ -64,11 +69,8 @@ public class TeamService {
     }
 
     public List<TeamBuild> getAvailableMatch(ParamRequest pm){
-        Double latPiuRag = pm.getLatitude()+ pm.getRaggio();
-        Double lonPiuRag = pm.getLongitude()+pm.getRaggio();
-        Double latMenRag = pm.getLatitude()- pm.getRaggio();
-        Double lonMenRag = pm.getLongitude()-pm.getRaggio();
-        List<TeamBuild> teamBuildList = teamBuildRepo.findByParams(latPiuRag, lonPiuRag, latMenRag, lonMenRag);
+        List<TeamBuild> teamBuildList = teamBuildRepo.findByParams(pm.getLatitude(), pm.getLongitude(), pm.getRaggio());
+        log.info("partite che tornano: " + teamBuildList.size());
         return teamBuildList;
     }
 

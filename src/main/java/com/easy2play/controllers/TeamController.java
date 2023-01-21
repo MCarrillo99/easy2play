@@ -5,6 +5,8 @@ import com.easy2play.DTO.TeamDTO;
 import com.easy2play.entities.Team;
 import com.easy2play.entities.TeamBuild;
 import com.easy2play.services.TeamService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +21,8 @@ public class TeamController {
     @Autowired
     private TeamService ts;
 
+    private static final Logger log = LoggerFactory.getLogger(TeamController.class);
+
     @PostMapping("/crea_team")
     public ResponseEntity<Team> creaTeam (@RequestBody TeamDTO teamDTO){
         return ts.createNewTeam(teamDTO);
@@ -31,6 +35,7 @@ public class TeamController {
 
     @PostMapping("/getAvailableMatch")
     public ResponseEntity<?> getAvailableMatch(@RequestBody ParamRequest paramRequest){
+        log.info("oggetto post: " + paramRequest);
         List<TeamBuild> tbList = ts.getAvailableMatch(paramRequest);
         return ResponseEntity.ok(tbList);
     }
