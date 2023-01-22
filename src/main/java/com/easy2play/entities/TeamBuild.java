@@ -34,6 +34,14 @@ public class TeamBuild {
         this.teamName = teamName;
     }
 
+    /*
+    public Integer getTotalPlayers(){
+        if(players != null) {
+            return otherPlayers + players.size();
+        }
+        return otherPlayers;
+    } */
+
     public TeamBuild(String teamName) {
         this.teamName = teamName;
     }
